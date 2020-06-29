@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/', to: "application#login"
   get '/home', to: "user#home"
 
-  resources :groups, only: [:index, :show, :new, :create]
+  resources :groups #, only: [:index, :show, :new, :create]
   
   # memberships shows all groups you are part of 
   resources :memberships, only: [:index, :create, :destroy]

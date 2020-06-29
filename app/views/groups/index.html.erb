@@ -1,0 +1,6 @@
+<h1>Master Groups List</h1>
+<ul>
+    <% @groups.each do |g| %>
+        <li><%= link_to g.name, group_path(g) %></li>
+    <% end %>
+</ul>

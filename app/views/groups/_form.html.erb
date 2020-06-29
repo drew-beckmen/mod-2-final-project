@@ -1,0 +1,8 @@
+<%= form_with model: @group do |f| %>
+    <strong><%= f.label :name %></strong>
+    <%= f.text_field :name%>
+    <strong><%= f.label :description %></strong>
+    <%= f.text_area :description %>
+    <%= f.hidden_field :creator_id, value: @user.id %>
+    <%= f.submit %>
+<% end %>
