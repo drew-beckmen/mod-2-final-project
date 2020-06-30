@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
 
     def index
         @groups = Group.all
+        @group = Group.new
     end
     
     def new
@@ -11,8 +12,14 @@ class GroupsController < ApplicationController
     end
 
     def create
-        @group = Group.create(group_params)
-        redirect_to group_path(@group)
+        @group = Group.new(group_params)
+        if @group.valid?
+            @group.save
+            redirect_to group_path(@group)
+        else
+            flash[:messages] = @group.errors.full_messages
+            redirect_to new_group_path
+        end
     end
 
     def edit
@@ -29,8 +36,9 @@ class GroupsController < ApplicationController
         redirect_to groups_path
     end
 
-    def show 
-        @membership = Membership.new 
+    def show
+        @user = current_user
+        @membership = @group.belong(@user) || Membership.new
     end 
 
     private

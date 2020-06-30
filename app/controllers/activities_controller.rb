@@ -6,17 +6,27 @@ class ActivitiesController < ApplicationController
         @user = current_user
         @activities = Activity.select { |activity| activity.goal.user == current_user }
     end
+
+    def show
+    end
     
     def new
         @activity = Activity.new
         @user = current_user
         @activity_types = ActivityType.all
+        @activity.build_activity_type
         @goals = current_user.goals
     end
 
     def create
-        @activity = Activity.create(activity_params)
-        redirect_to activity_path(@activity)
+        @activity = Activity.new(activity_params)
+        if @activity.valid?
+            @activity.save
+            redirect_to activity_path(@activity)
+        else
+            flash[:errors] = @activity.errors.full_messages
+            redirect_to new_activity_path
+        end
     end
 
     def edit
@@ -38,7 +48,7 @@ class ActivitiesController < ApplicationController
     private
 
     def activity_params
-        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating)
+        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description])
     end
 
     def current_activity

@@ -1,15 +1,38 @@
+<% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+        <ul>
+            <li style="color:red"><%= error %></li>
+        </ul>
+    <% end %>
+<% end %>
+
+
 <%= form_with model: @activity do |f| %>
     <strong><%= f.label :activity_type %></strong>
-    <%= f.collection_select :activity_type_id, @activity_types, :id, :name %>
+    <%= f.collection_select :activity_type_id, @activity_types, :id, :name, include_blank: true %>
+    <br>
+    <strong><%= f.label "Or Create a new Activity Type:"%></strong>
+    <%= f.fields_for :activity_type do |atf| %>
+        <em><%= atf.label "Activity Name:"%></em>
+        <%= atf.text_field :name %>
+        <em><%= atf.label "Description:"%></em>
+        <%= atf.text_area :description%>
+    <% end %>
+    <br>
     <strong><%= f.label :description %></strong>
     <%= f.text_area :description %>
+    <br>
     <strong><%= f.label :duration %></strong>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, step: 0.25 %>hours
+    <br>
     <strong><%= f.label :activity_date %></strong>
     <%= f.date_select :activity_date %>
+    <br>
     <strong><%= f.label :rating %></strong>
     <%= f.number_field :rating %>
+    <br>
     <strong><%= f.label :goal %></strong>
     <%= f.collection_select :goal_id, @goals, :id, :name %>
+    <br>
     <%= f.submit %>
 <% end %>

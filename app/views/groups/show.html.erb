@@ -1,16 +1,29 @@
 <h1><%= @group.name %></h2>
 <p><strong>Description: </strong><%= @group.description %></p>
-
+<img src="<%= @group.img_url %>">
 <h2>Members List</h2>
 <ul>
     <% @group.users.each do |user| %>
         <li><%= link_to user.name, user_path(user) %></li>
     <% end %>
 </ul>
-
+<% if @group.belong?(@user) %>
+    <%= form_with model: @membership, method: "delete"  do |f| %>
+        <%= f.hidden_field :group_id, :value => @group.id %>
+        <%= f.hidden_field :user_id, :value => session[:user_id] %>
+        <%= f.submit "Leave Group" %>
+    <% end %>
+<% else %>
     <%= form_with model: @membership do |f| %>
         <%= f.hidden_field :group_id, :value => @group.id %>
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
         <%= f.submit "Join Group" %>
     <% end %>
+<% end %>
+
+<% if @group.is_creator?(@user) %>
+    <%= form_with model: @group, method: "delete"  do |f| %>
+        <%= f.submit "Delete Group" %>
+    <% end %>
+<% end %>
 

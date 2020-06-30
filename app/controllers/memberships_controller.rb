@@ -9,6 +9,13 @@ class MembershipsController < ApplicationController
         @memberships = Membership.select{|mem| mem.user == current_user }
         @user = current_user
     end
+
+    def destroy
+        @membership = Membership.find(params[:id])
+        # byebug
+        @membership.destroy
+        redirect_to memberships_path
+    end
     private
 
     def membership_params

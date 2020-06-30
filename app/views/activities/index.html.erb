@@ -1,6 +1,6 @@
 <h1>Activities List for <%=@user.name%></h1>
 <ul>
     <% @activities.each do |act| %>
-        <li><%= link_to "#{act.activity_date.strftime("%m/%d/%y")} — #{act.activity_type.name}", activity_path(act) %> </li>
+        <li><%= link_to "#{act.activity_date.strftime('%m/%d/%y')} — #{act.activity_type.name}", activity_path(act) %> </li>
     <% end %>
 </ul>
