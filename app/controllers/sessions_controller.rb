@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController 
+    skip_before_action :authenticated, only: [:new, :create]
     def new 
     end 
     
@@ -12,5 +13,10 @@ class SessionsController < ApplicationController
             flash[:message] = "Incorrect email or password"
             redirect_to "/"
         end 
+    end 
+
+    def destroy 
+        session.delete(:user_id)
+        redirect_to "/"
     end 
 end 

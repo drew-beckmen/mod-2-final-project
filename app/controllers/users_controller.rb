@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
     before_action :find_user, only: [:home, :edit, :update, :show]
-    before_action :require_login
-    skip_before_action :require_login, only: [:new, :create]
-    before_action :protect_pages, only: [:home, :edit, :destroy]
+    skip_before_action :authenticated, only: [:new, :create]
+    
     def new 
         @user = User.new 
     end 
@@ -54,16 +53,6 @@ class UsersController < ApplicationController
     end 
 
     def find_user 
-        @user = User.find(params[:id])
-    end 
-
-    def require_login 
-        return head(:forbidden) unless session.include? :user_id 
-    end
-
-    def protect_pages 
-        if session[:user_id] != params[:id].to_i
-            redirect_to "/home/#{session[:user_id]}"
-        end 
+        @user = User.find(session[:user_id])
     end 
 end
