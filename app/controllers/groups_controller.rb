@@ -29,6 +29,10 @@ class GroupsController < ApplicationController
         redirect_to groups_path
     end
 
+    def show 
+        @membership = Membership.new 
+    end 
+
     private
 
     def group_params

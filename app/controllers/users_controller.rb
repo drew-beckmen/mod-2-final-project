@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-    before_action :find_user, only: [:home, :edit, :update, :show]
+    before_action :find_user_logged_in, only: [:home, :edit, :update]
+    before_action :find_user, only: [:show]
     skip_before_action :authenticated, only: [:new, :create]
     
     def new 
@@ -49,7 +50,11 @@ class UsersController < ApplicationController
         params.require(:user).permit(:username, :password, :password_confirmation, :name, :contact, :photo)
     end 
 
-    def find_user 
+    def find_user_logged_in 
         @user = User.find(session[:user_id])
+    end 
+
+    def find_user 
+        @user = User.find(params[:id])
     end 
 end

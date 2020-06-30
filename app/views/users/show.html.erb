@@ -4,4 +4,8 @@
 
 <h2>Name: <%= @user.name %></h2>
 <h2><%= @user.created_at.strftime("Member since: %m/%d/%Y")%></h2>
-<h2>Activities Logged: <%= @user.activities.count %></h2>
+<h2>Activities Logged on Centered: <%= @user.activities.count %></h2>
+
+<h2>Contact: 
+    <a href="mailto:<%=@user.contact%>"> <%= @user.contact%></a>
+</h2>

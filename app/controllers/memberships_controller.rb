@@ -2,6 +2,7 @@ class MembershipsController < ApplicationController
     
     def create
         @membership=Membership.create(membership_params)
+        redirect_to "/groups"
     end
 
     private
