@@ -1,0 +1,25 @@
+<h1>Welcome to Centered:</h1>
+
+<% if flash[:message] %>
+    <ul>
+        <li><%= flash[:message] %></li>
+    </ul>
+<% end %>
+
+<%= form_tag('/login', method: "post") do %>
+    <label>Username:</label>
+    <%= text_field_tag :username %>
+    <br/>
+    <br/>
+
+    <label>Password:</label>
+    <%= password_field_tag :password %>
+    <br/><br/>
+    <%= submit_tag "Login" %>
+
+<% end %>
+
+<br/>
+
+<h2>Don't have an account?</h2>
+<%= link_to  "Create New User", '/users/new' %>

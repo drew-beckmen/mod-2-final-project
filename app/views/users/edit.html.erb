@@ -1,0 +1,9 @@
+<h1>Edit your user profile: </h1>
+
+<%= render "form" %>
+
+<br/>
+<br/>
+<br/> 
+
+<%= button_to "Delete User", {:controller => :users, :action => 'destroy', :id => @user.id }, :method => :delete %>
