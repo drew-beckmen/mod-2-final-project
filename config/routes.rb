@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   root "sessions#new"
   get '/home/:id', to: "users#home"
   delete "/logout", to: "sessions#destroy"
