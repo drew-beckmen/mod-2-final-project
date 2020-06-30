@@ -1,0 +1,15 @@
+<%= form_with model: @activity do |f| %>
+    <strong><%= f.label :activity_type %></strong>
+    <%= f.collection_select :activity_type_id, @activity_types, :id, :name %>
+    <strong><%= f.label :description %></strong>
+    <%= f.text_area :description %>
+    <strong><%= f.label :duration %></strong>
+    <%= f.number_field :duration %>
+    <strong><%= f.label :activity_date %></strong>
+    <%= f.date_select :activity_date %>
+    <strong><%= f.label :rating %></strong>
+    <%= f.number_field :rating %>
+    <strong><%= f.label :goal %></strong>
+    <%= f.collection_select :goal_id, @goals, :id, :name %>
+    <%= f.submit %>
+<% end %>

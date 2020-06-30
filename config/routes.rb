@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :activity_types, only: [:index, :create]
 
   # Goals and Goal Activities will have all RESTful routes 
-  resources :activites 
+  resources :activities 
   resources :goals
   resources :users, only: [:create, :new, :edit, :show, :update, :destroy]
 end

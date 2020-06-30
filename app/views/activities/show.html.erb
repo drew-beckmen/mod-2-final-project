@@ -1,0 +1,9 @@
+<h1><%= @activity.activity_type.name %></h2>
+<p><strong>Description: </strong><%= @activity.description %></p>
+<h2><strong>Date: </strong><%= @activity.activity_date.strftime('%B %e, %y') %></h2>
+<h2><strong>Duration: </strong><%= "#{@activity.duration.round(2)} hours"%></h2>
+<h2><strong>Goal: </strong><%= link_to @activity.goal.name, goal_path(@activity.goal) %>
+<h2><strong>Rating: </strong><%= @activity.rating %></h2>
+
+
+
