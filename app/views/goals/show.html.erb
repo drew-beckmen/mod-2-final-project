@@ -1,0 +1,13 @@
+<h1>Goal: <%= @goal.name %></h1>
+<h2><i><%= @goal.description %></i></h2>
+
+<ul>
+    <li>Start Date: <%= @goal.start_day %></li>
+    <li>End Date: <%= @goal.end_day %></li>
+    <li>Hours Completed: <%= @goal.hours_so_far %></li>
+    <li>Target Number of Hours: <%= @goal.target_hours %></li>
+    <li>Progress: <%= @goal.progress %> %</li>
+</ul>
+
+<%= link_to  "All Goals", "/goals" %> <br/>
+<%= link_to  "Edit Goal", "/goals/#{@goal.id}/edit" %>

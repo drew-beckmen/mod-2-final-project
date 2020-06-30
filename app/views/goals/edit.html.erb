@@ -1,0 +1,7 @@
+<h1>Edit your goal: </h1>
+
+<%= render "form" %>
+<br/>
+<%= form_for(@goal, method: :delete) do |f| %>
+    <%= f.submit "Delete this goal" %>
+<% end %>
