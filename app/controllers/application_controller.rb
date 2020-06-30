@@ -15,4 +15,5 @@ class ApplicationController < ActionController::Base
     def authenticated 
         redirect_to "/" unless logged_in?
     end 
+
 end

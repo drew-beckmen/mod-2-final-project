@@ -1,0 +1,6 @@
+<h1>Groups for user <%= @user.name %></h1>
+<ul>
+    <% @memberships.each do |mem| %>
+        <li><%= link_to mem.group.name, group_path(mem.group)%></li>
+    <% end %>
+</ul>

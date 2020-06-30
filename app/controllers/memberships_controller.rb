@@ -5,6 +5,10 @@ class MembershipsController < ApplicationController
         redirect_to "/groups"
     end
 
+    def index
+        @memberships = Membership.select{|mem| mem.user == current_user }
+        @user = current_user
+    end
     private
 
     def membership_params

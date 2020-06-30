@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     
     def new
         @group = Group.new
-        @user = User.first ## this line will need to change to current logged in user
+        @user = current_user
     end
 
     def create
@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
     end
 
     def edit
-        @user = User.first ## this line will need to change to current logged in user
+        @user = current_user
     end
 
     def update

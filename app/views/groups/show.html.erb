@@ -8,9 +8,9 @@
     <% end %>
 </ul>
 
-<%= form_with model: @membership do |f| %>
-    <%= f.hidden_field :group_id, :value => @group.id %>
-    <%= f.hidden_field :user_id, :value => session[:user_id] %>
-    <%= f.submit "Join Group" %>
-<% end %>
+    <%= form_with model: @membership do |f| %>
+        <%= f.hidden_field :group_id, :value => @group.id %>
+        <%= f.hidden_field :user_id, :value => session[:user_id] %>
+        <%= f.submit "Join Group" %>
+    <% end %>
 

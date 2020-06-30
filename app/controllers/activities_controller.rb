@@ -45,8 +45,4 @@ class ActivitiesController < ApplicationController
         @activity = Activity.find(params[:id])
     end
 
-    def current_user
-        # session[:user_id]
-        User.first ## CHANGE!!!
-    end
 end
