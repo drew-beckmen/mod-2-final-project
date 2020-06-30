@@ -1,11 +1,8 @@
-<% if flash[:errors] || flash[:password_mismatch] %>
+<% if flash[:errors] %>
     <h2>Errors:</h2>
     <ul>
     <% flash[:errors].each do |error| %>
         <li><%= error %></li>
-    <% end %>
-    <% if flash[:password_mismatch] %>
-        <li><%= flash[:password_mismatch] %></li>
     <% end %>
     </ul>
 <% end %>

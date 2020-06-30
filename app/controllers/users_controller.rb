@@ -9,10 +9,7 @@ class UsersController < ApplicationController
 
     def create 
         new_user = User.new(user_params)
-        if params[:user][:password] != params[:user][:password_confirmation]
-            flash[:password_mismatch] = "Password confirmation did not match."
-            redirect_to '/users/new'
-        elsif !new_user.valid?
+        if !new_user.valid?
             flash[:errors] = new_user.errors.full_messages
             redirect_to '/users/new'
         else 
