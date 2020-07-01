@@ -36,7 +36,6 @@ class ActivitiesController < ApplicationController
     end
 
     def show 
-        byebug
     end 
 
     private
