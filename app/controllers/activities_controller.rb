@@ -1,7 +1,8 @@
 class ActivitiesController < ApplicationController
     
     before_action :current_activity, only: [:edit, :update, :show, :destroy]
-
+    skip_before_action :authenticated, only: [:new, :create]
+    
     def index
         @user = current_user
         @activities = @user.activities

@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   post '/login', to: 'sessions#create'
 
-
   resources :groups #, only: [:index, :show, :new, :create]
   
   # memberships shows all groups you are part of 
