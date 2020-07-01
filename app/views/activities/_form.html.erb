@@ -33,6 +33,7 @@
     <br>
     <strong><%= f.label :goal %></strong>
     <%= f.collection_select :goal_id, @goals, :id, :name %>
+    <strong><%= f.label "Or name a new goal:" %></strong>
     <br>
     <%= f.submit %>
 <% end %>
