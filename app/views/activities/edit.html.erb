@@ -1,2 +1,7 @@
 <h1><strong>Edit </strong><%= @activity.activity_type.name %></h1>
 <%= render "form" %>
+
+<br/>
+<%= form_for(@activity, method: :delete) do |f| %>
+    <%= f.submit "Delete this activity" %>
+<% end %>
