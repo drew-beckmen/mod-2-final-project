@@ -1,0 +1,33 @@
+<nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="/home/<%= session[:user_id] %>">Centered</a>
+      <form class="form-inline">
+        <a class="btn btn-outline-primary" href="/goals" role="button">
+        Goals
+        </a>
+
+        <div style="padding-left: 50px;">
+          <a class="btn btn-outline-primary" href="/groups" role="button">
+          Groups
+          </a>
+        </div>
+
+        <div style="padding-left: 50px;">
+          <a class="btn btn-outline-primary" href="/memberships" role="button">
+          Memberships
+          </a>
+        </div>
+
+        <div style="padding-left: 50px;">
+          <a class="btn btn-outline-primary" href="/activities" role="button">
+          Activities
+          </a>
+        </div>
+
+        <div style="padding-left: 50px;">
+          <a class="btn btn-outline-primary" href="/users/<%= session[:user_id] %>/edit" role="button">
+          Edit Profile
+          </a>
+        </div>
+
+    </form>
+  </nav>
