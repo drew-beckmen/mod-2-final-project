@@ -12,5 +12,21 @@ class Goal < ApplicationRecord
 
     def progress 
         (self.hours_so_far / self.target_hours).round(3) * 100
+    end
+    
+    def progress_for_pie_chart 
+        percentage_complete = self.progress 
+        percentage_incomplete = (100 - percentage_complete) if percentage_complete <= 100
+        {Complete: percentage_complete, Incomplete: percentage_incomplete}
+    end 
+
+    def status 
+        if self.progress >= 100 
+            "Goal complete!"
+        elsif self.progress <= 100 && self.end_day < Date.today
+            "Goal expired without completion"
+        else 
+            "Goal incomplete. Keep working!"
+        end 
     end 
 end

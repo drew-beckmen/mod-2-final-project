@@ -7,8 +7,37 @@
 
 </br>
 
+<% if @user.has_streak? %>
+<h2>Badges:</h2>
+<ul>
+    <% if @user.streak_today? %>
+        <li>You centered yourself today! &#127881;</li>
+    <% end %>
 
+    <% if @user.streak_this_week? %>
+        <li>You centered yourself every day this week! &#127881;</li>
+    <% end %>
 
-<%= form_with url: "/logout", method: "delete" do |f| %>
-	<%= f.submit "Logout" %>
+    <% if @user.streak_this_month? %>
+        <li>You centered yourself every day this month! &#127881;</li>
+    <% end %>
+
+</ul>
 <% end %>
+
+
+<h2>Your Overall Activity Summary:</h2>
+<%= line_chart @user.activities.group_by_day(:activity_date).count %>
+
+<h2>Your Activity This Week:</h2>
+<%= line_chart @user.activities.group_by_day(:activity_date).count, xmin: Date.today - 7, xmax: Date.today %>
+
+
+<h2>Your Activity Summary by Type:</h2>
+<%= pie_chart @user.formatted_activities %>
+
+<h2>Your Goal Progress:</h2>
+<%= column_chart @user.formatted_goals, suffix: "%", max: 100 %>
+
+
+<%= button_to "Logout", "/logout", :method => :delete %>

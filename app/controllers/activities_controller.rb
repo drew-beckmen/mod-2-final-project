@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
 
     def index
         @user = current_user
-        @activities = Activity.select { |activity| activity.goal.user == current_user }
+        @activities = @user.activities
     end
 
     def show
@@ -54,5 +54,4 @@ class ActivitiesController < ApplicationController
     def current_activity
         @activity = Activity.find(params[:id])
     end
-
 end
