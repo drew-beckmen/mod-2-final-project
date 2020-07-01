@@ -8,6 +8,7 @@ class ActivitiesController < ApplicationController
     end
 
     def show
+        byebug
     end
     
     def new
@@ -19,13 +20,16 @@ class ActivitiesController < ApplicationController
     end
 
     def create
+        byebug
         @activity = Activity.new(activity_params)
+        byebug
         if @activity.valid?
             @activity.save
             redirect_to activity_path(@activity)
         else
             flash[:errors] = @activity.errors.full_messages
             redirect_to new_activity_path
+            # render 'show'
         end
     end
 
@@ -48,7 +52,7 @@ class ActivitiesController < ApplicationController
     private
 
     def activity_params
-        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description])
+        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description, :creator_id])
     end
 
     def current_activity

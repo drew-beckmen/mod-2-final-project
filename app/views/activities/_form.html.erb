@@ -7,12 +7,13 @@
 <% end %>
 
 
-<%= form_with model: @activity do |f| %>
+<%= form_with model: @activity, local: true do |f| %>
     <strong><%= f.label :activity_type %></strong>
     <%= f.collection_select :activity_type_id, @activity_types, :id, :name, include_blank: true %>
     <br>
     <strong><%= f.label "Or Create a new Activity Type:"%></strong>
     <%= f.fields_for :activity_type do |atf| %>
+        <%= atf.hidden_field :creator_id, value: @user.id %>
         <em><%= atf.label "Activity Name:"%></em>
         <%= atf.text_field :name %>
         <em><%= atf.label "Description:"%></em>

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    before_action :authenticated
+    # before_action :authenticated
 
     def current_user
         if session[:user_id]

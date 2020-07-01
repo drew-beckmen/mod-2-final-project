@@ -6,7 +6,7 @@
     </ul>
 <% end %>
 
-<%= form_with model: @group do |f| %>
+<%= form_with model: @group, local: true do |f| %>
     <strong><%= f.label :name %></strong>
     <%= f.text_field :name%>
     <strong><%= f.label :description %></strong>
