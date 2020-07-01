@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2020_06_29_190030) do
     t.text "description"
     t.date "start_day"
     t.date "end_day"
-    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

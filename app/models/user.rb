@@ -11,4 +11,25 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 6}
 
     has_secure_password 
+
+    def formatted_activities 
+        format_activities = {}
+        self.activities.each do |activity|
+            if format_activities[activity.activity_type.name].nil?
+                format_activities[activity.activity_type.name] = 1 
+            else 
+                format_activities[activity.activity_type.name] += 1
+            end 
+        end 
+        format_activities
+    end 
+
+    def formatted_goals 
+        format_goals = {}
+        self.goals.each do |goal|
+            format_goals[goal.name] = goal.progress 
+        end 
+        format_goals 
+    end 
+
 end

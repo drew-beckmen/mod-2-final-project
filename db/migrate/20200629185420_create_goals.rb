@@ -7,7 +7,6 @@ class CreateGoals < ActiveRecord::Migration[6.0]
       t.text :description
       t.date :start_day
       t.date :end_day
-      t.string :status
       t.timestamps
     end
   end

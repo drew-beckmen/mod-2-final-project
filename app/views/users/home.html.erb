@@ -7,7 +7,14 @@
 
 </br>
 
+<h2>Your Activity Summary by Day:</h2>
+<%= line_chart @user.activities.group_by_day(:activity_date).count %>
 
+<h2>Your Activity Summary by Type:</h2>
+<%= pie_chart @user.formatted_activities %>
+
+<h2>Your Goal Progress:</h2>
+<%= column_chart @user.formatted_goals, suffix: "%"%>
 
 <%= form_with url: "/logout", method: "delete" do |f| %>
 	<%= f.submit "Logout" %>
