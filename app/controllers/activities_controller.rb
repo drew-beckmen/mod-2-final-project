@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
 
     def index
         @user = current_user
-        @activities = Activity.select { |activity| activity.goal.user == current_user }
+        @activities = @user.activities
     end
     
     def new
@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
 
     def create
         @activity = Activity.create(activity_params)
-        redirect_to activity_path(@activity)
+        redirect_to @activity
     end
 
     def edit
@@ -35,6 +35,10 @@ class ActivitiesController < ApplicationController
         redirect_to activities_path
     end
 
+    def show 
+        byebug
+    end 
+
     private
 
     def activity_params
@@ -43,10 +47,5 @@ class ActivitiesController < ApplicationController
 
     def current_activity
         @activity = Activity.find(params[:id])
-    end
-
-    def current_user
-        # session[:user_id]
-        User.first ## CHANGE!!!
     end
 end

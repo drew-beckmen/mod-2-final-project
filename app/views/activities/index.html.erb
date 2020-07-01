@@ -4,3 +4,5 @@
         <li><%= link_to "#{act.activity_date.strftime("%m/%d/%y")} — #{act.activity_type.name}", activity_path(act) %> </li>
     <% end %>
 </ul>
+
+<%= button_to "Log an Activity", "/activities/new", :method => :get %>

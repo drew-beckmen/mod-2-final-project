@@ -35,7 +35,7 @@ class GoalsController < ApplicationController
     end 
 
     def index 
-        @goals = Goal.where(user_id: session[:user_id])
+        @user = current_user 
     end 
 
     def destroy
