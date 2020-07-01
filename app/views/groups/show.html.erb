@@ -1,6 +1,6 @@
 <h1><%= @group.name %></h2>
 <p><strong>Description: </strong><%= @group.description %></p>
-<img src="<%= @group.img_url %>">
+<img class="img-fluid" src="<%= @group.img_url %>">
 <h2>Members List</h2>
 <ul>
     <% @group.users.each do |user| %>

@@ -1,6 +1,6 @@
 <h1>User Public Profile:</h1>
 
-<img src="<%= @user.photo %>">
+<img class="img-fluid" src="<%= @user.photo %>">
 
 <h2>Name: <%= @user.name %></h2>
 <h2><%= @user.created_at.strftime("Member since: %m/%d/%Y")%></h2>
