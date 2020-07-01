@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :group_activity_types
   root "sessions#new"
   get '/home/:id', to: "users#home"
   delete "/logout", to: "sessions#destroy"

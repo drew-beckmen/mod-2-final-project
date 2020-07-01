@@ -6,9 +6,9 @@
     <% end %>
 <% end %>
 
-
+<br>
 <%= bootstrap_form_with model: @activity, local: true do |f| %>
-    <%= f.collection_select :activity_type_id, @activity_types, :id, :name, include_blank: true %>
+    <%= f.collection_select :activity_type_id, @activity_types.sort_by(&:name), :id, :name, include_blank: true, size: 10 %>
     <br>
     <strong><%= f.label "Or Create a new Activity Type:"%></strong>
     <%= f.fields_for :activity_type do |atf| %>
@@ -32,7 +32,7 @@
     <%= f.number_field :rating %>
     <br>
   
-    <%= f.collection_select :goal_id, @goals, :id, :name %>
+    <%= f.collection_select :goal_id, @goals, :id, :name, include_blank: true %>
     <strong><%= f.label "Or name a new goal:" %></strong>
     <%= f.fields_for :goal do |gf| %>
         <%= gf.hidden_field :user_id, value: @user.id %>

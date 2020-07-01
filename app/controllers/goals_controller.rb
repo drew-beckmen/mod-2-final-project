@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
     before_action :find_goal, only: [:show, :edit, :update]
+    before_action :redirect_unauthorized, only: [:show, :edit]
     
     def new 
         @goal = Goal.new 
@@ -39,7 +40,9 @@ class GoalsController < ApplicationController
     end 
 
     def destroy
-        Goal.find(params[:id]).destroy 
+        goal = Goal.find(params[:id])
+        goal.activities.destroy_all
+        goal.destroy
         redirect_to "/goals"
     end 
 
@@ -51,4 +54,11 @@ class GoalsController < ApplicationController
     def goal_params
         params.require(:goal).permit(:target_hours, "start_day(1i)", "start_day(2i)", "start_day(3i)", "end_day(1i)", "end_day(2i)", "end_day(3i)", :name, :description)
     end 
+
+    def redirect_unauthorized
+        # byebug
+        if !(@goal.user == current_user)
+            redirect_to goals_path
+        end
+    end
 end

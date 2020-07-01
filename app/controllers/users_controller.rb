@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
     before_action :find_user_logged_in, only: [:home, :edit, :update]
     before_action :find_user, only: [:show]
+    before_action :redirect_unauthorized, only: [:show]
     skip_before_action :authenticated, only: [:new, :create]
     
     def new 
@@ -47,6 +48,13 @@ class UsersController < ApplicationController
 
 
     private 
+
+    def redirect_unauthorized
+        if !current_user.connected_via_group?(@user)
+            redirect_to user_path(current_user)
+        end
+    end
+
     def user_params 
         params.require(:user).permit(:username, :password, :password_confirmation, :name, :contact, :photo)
     end 

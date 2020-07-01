@@ -1,0 +1,2 @@
+class GroupActivityTypesController < ApplicationController
+end

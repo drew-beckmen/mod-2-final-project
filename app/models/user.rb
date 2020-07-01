@@ -109,4 +109,8 @@ class User < ApplicationRecord
     def most_hated_activity_type
         formatted_activity_type_ratings.min_by {|k, v| v}.first
     end 
+
+    def connected_via_group?(another_user)
+        self.groups.map{|group| group.users.include?(another_user)}.include?(true)
+    end
 end

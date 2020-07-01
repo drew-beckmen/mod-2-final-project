@@ -22,8 +22,8 @@
 <% end %>
 
 <% if @group.is_creator?(@user) %>
-    <%= form_with model: @group, method: "delete", local: true  do |f| %>
-        <%= f.submit "Delete Group" %>
+    <%= form_with url: edit_group_path(@group), method: "get", local: true  do |f| %>
+        <%= f.submit "Edit Group" %>
     <% end %>
 <% end %>
 

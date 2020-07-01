@@ -1,6 +1,8 @@
 class Group < ApplicationRecord
     has_many :memberships
     has_many :users, through: :memberships
+    has_many :group_activity_types
+    has_many :activity_types, through: :group_activity_types
     validates :name, presence: true
     validates :name, uniqueness: true
 

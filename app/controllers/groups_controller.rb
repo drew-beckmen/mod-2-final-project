@@ -9,10 +9,13 @@ class GroupsController < ApplicationController
     def new
         @group = Group.new
         @user = current_user
+        @activity_types = ActivityType.all
     end
 
     def create
+        byebug
         @group = Group.new(group_params)
+        params[:group][:activity_types].reject{|aty| aty==""}.each { |grp| @group.activity_type_ids << grp}
         if @group.valid?
             @group.save
             redirect_to group_path(@group)
@@ -24,6 +27,7 @@ class GroupsController < ApplicationController
 
     def edit
         @user = current_user
+        @activity_types = ActivityType.all
     end
 
     def update

@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
-    
     before_action :current_activity, only: [:edit, :update, :show, :destroy]
+    before_action :redirect_unauthorized, only: [:show, :edit]
     skip_before_action :authenticated, only: [:new, :create]
     
     def index
@@ -53,6 +53,12 @@ class ActivitiesController < ApplicationController
     end
 
     private
+
+    def redirect_unauthorized
+        if !(@activity.goal.user == current_user)
+            redirect_to activities_path
+        end
+    end
 
     def activity_params
         params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description, :creator_id], goal_attributes: [:name, :target_hours, :user_id, :start_day, :end_day])
