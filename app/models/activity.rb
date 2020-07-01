@@ -12,7 +12,12 @@ class Activity < ApplicationRecord
             at = ActivityType.find_or_create_by(name: atr[:name])
             at.update(atr)
             self.activity_type=at
-            byebug
+        end
+    end
+
+    def goal_attributes=(atr)
+        unless (!atr[:name]) || atr[:name].strip==""
+            self.goal = Goal.create(atr)
         end
     end
 

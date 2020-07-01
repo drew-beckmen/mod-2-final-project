@@ -16,6 +16,7 @@ class ActivitiesController < ApplicationController
         @user = current_user
         @activity_types = ActivityType.all
         @activity.build_activity_type
+        @activity.build_goal
         @goals = current_user.goals
     end
 
@@ -23,7 +24,11 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         if @activity.valid?
             @activity.save
-            redirect_to activity_path(@activity)
+            if a_new_goal?
+                redirect_to activity_path(@activity)
+            else
+                redirect_to edit_goal_path(@activity.goal)
+            end
         else
             flash[:errors] = @activity.errors.full_messages
             redirect_to new_activity_path
@@ -50,10 +55,14 @@ class ActivitiesController < ApplicationController
     private
 
     def activity_params
-        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description, :creator_id])
+        params.require(:activity).permit(:activity_type_id, :description, :goal_id, :activity_date, :duration, :rating, activity_type_attributes: [:name, :description, :creator_id], goal_attributes: [:name, :target_hours, :user_id, :start_day, :end_day])
     end
 
     def current_activity
         @activity = Activity.find(params[:id])
+    end
+
+    def a_new_goal?
+        (!params[:activity][:goal_attributes]) || (!params[:activity][:goal_attributes][:name]) || params[:activity][:goal_attributes][:name].strip==""
     end
 end

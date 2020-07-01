@@ -35,6 +35,14 @@
     <strong><%= f.label :goal %></strong>
     <%= f.collection_select :goal_id, @goals, :id, :name %>
     <strong><%= f.label "Or name a new goal:" %></strong>
+    <%= f.fields_for :goal do |gf| %>
+        <%= gf.hidden_field :user_id, value: @user.id %>
+        <%= gf.hidden_field :target_hours, value: 5 %>
+        <%= gf.hidden_field :start_day, value: Date.today %>
+        <%= gf.hidden_field :end_day, value: Date.today+7 %>
+        <em><%= gf.label "New Goal Name:"%></em>
+        <%= gf.text_field :name %>
+    <% end %>
     <br>
     <%= f.submit %>
 <% end %>
