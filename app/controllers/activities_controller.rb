@@ -9,7 +9,6 @@ class ActivitiesController < ApplicationController
     end
 
     def show
-        byebug
     end
     
     def new
@@ -21,9 +20,7 @@ class ActivitiesController < ApplicationController
     end
 
     def create
-        byebug
         @activity = Activity.new(activity_params)
-        byebug
         if @activity.valid?
             @activity.save
             redirect_to activity_path(@activity)
