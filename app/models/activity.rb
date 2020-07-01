@@ -5,6 +5,8 @@ class Activity < ApplicationRecord
     # validates :activity_type_id, presence: true  ##  Needs special validator
     validates :duration, presence: true
     validates :activity_date, presence: true
+    validates :rating, presence: true 
+    validates :rating, numericality: {less_than: 11, greater_than: 0}
     # validates_with GoalValidator ## Will check for presence of either goal_id or nested params for goal association
 
     def activity_type_attributes=(atr)
