@@ -83,4 +83,30 @@ class User < ApplicationRecord
         streak_this_week? || streak_this_month? || streak_today?
     end 
 
+    #Returns hash with keys as activity types 
+    # and values as an array of all the ratings 
+    # for a user's activity of that activity type
+    def activity_type_with_ratings
+        activity_type_ratings = {}
+        self.activities.each do |activity|
+            if activity_type_ratings[activity.activity_type.name].nil?
+                activity_type_ratings[activity.activity_type.name] = [activity.rating]
+            else 
+                activity_type_ratings[activity.activity_type.name] << activity.rating
+            end 
+        end 
+        activity_type_ratings 
+    end 
+
+    # calculates averages to use with column chart
+    def formatted_activity_type_ratings
+        ratings = self.activity_type_with_ratings
+        ratings.each do |type, arr_ratings| 
+            ratings[type] = arr_ratings.reduce(:+).to_f / arr_ratings.size
+        end 
+    end 
+
+    def most_hated_activity_type
+        formatted_activity_type_ratings.min_by {|k, v| v}.first
+    end 
 end

@@ -1,14 +1,14 @@
 class ActivitiesController < ApplicationController
     
     before_action :current_activity, only: [:edit, :update, :show, :destroy]
-
+    skip_before_action :authenticated, only: [:new, :create]
+    
     def index
         @user = current_user
         @activities = @user.activities
     end
 
     def show
-        byebug
     end
     
     def new
@@ -20,9 +20,7 @@ class ActivitiesController < ApplicationController
     end
 
     def create
-        byebug
         @activity = Activity.new(activity_params)
-        byebug
         if @activity.valid?
             @activity.save
             redirect_to activity_path(@activity)
