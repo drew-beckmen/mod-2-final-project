@@ -14,6 +14,8 @@
     <% end %>
 </ul>
 <br>
+<h4><strong><%= button_to "Create a new group!", new_group_path, method: :get %></strong><h4>
+<br>
 <h2>All Groups</h2>
 <ul>
     <% @groups.sort_by(&:name).each do |g| %>
@@ -22,4 +24,3 @@
 </ul>
 <br>
 <br>
-<h4><strong><%= button_to "Create a new group!", new_group_path, method: :get %></strong><h4>
