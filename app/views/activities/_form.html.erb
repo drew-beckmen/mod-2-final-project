@@ -10,20 +10,21 @@
 <%= bootstrap_form_with model: @activity, local: true do |f| %>
     <%= f.collection_select :activity_type_id, @activity_types, :id, :name, include_blank: true %>
     <br>
-    <strong><%= f.label "Or Create a new Activity Type:"%></strong>
+    <hr>
+    <strong style="color:lightblue"><%= f.label "Or Create a new Activity Type:"%></strong>
     <%= f.fields_for :activity_type do |atf| %>
         <%= atf.hidden_field :creator_id, value: @user.id %>
         
-        <%= atf.text_field :name %>
+        <%= atf.text_field :name, label: "Activity Type Name" %>
         
-        <%= atf.text_area :description%>
+        <%= atf.text_area :description, label: "Activity Type Description"%>
     <% end %>
     <br>
-    
+    <hr>
     <%= f.text_area :description %>
     <br>
     
-    <%= f.number_field :duration, step: 0.25 %>hours
+    <%= f.number_field :duration, step: 0.25, label: "Duration (hours)" %>
     <br>
     
     <%= f.date_select :activity_date %>
@@ -31,9 +32,10 @@
     
     <%= f.number_field :rating %>
     <br>
-  
+    
     <%= f.collection_select :goal_id, @goals, :id, :name %>
-    <strong><%= f.label "Or name a new goal:" %></strong>
+    <hr>
+    <strong style="color:lightblue"><%= f.label "Or name a new goal:" %></strong>
     <%= f.fields_for :goal do |gf| %>
         <%= gf.hidden_field :user_id, value: @user.id %>
         <%= gf.hidden_field :target_hours, value: 5 %>
@@ -41,6 +43,7 @@
         <%= gf.hidden_field :end_day, value: Date.today+7 %>
         <%= gf.text_field :name, label: "New Goal Name" %>
     <% end %>
+    <hr>
     <br>
     <%= f.submit %>
 <% end %>

@@ -1,9 +1,9 @@
 <h1 style="color:lightblue">Welcome, <%= @user.name %>!</h1>
-
+<h2 style="color:gray">Time to kickstart your wellness journey 🚀</h2>
 <div class="btn btn-default">
+    | <%= link_to 'Set New Goal', new_goal_path, :class => "btn btn-primary" %> |
+    <%= link_to 'Log an Activity', new_activity_path, :class => "btn btn-primary"%> |
     <%= link_to "Logout", "/logout", :method => :delete, :class => "btn btn-primary"  %> |
-    <%= link_to 'Set New Goal', new_goal_path, :class => "btn btn-primary" %> |
-    <%= link_to 'Log an Activity', new_activity_path, :class => "btn btn-primary"%>
 </div>
 </br>
 </br>
