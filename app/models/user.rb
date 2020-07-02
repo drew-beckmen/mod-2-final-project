@@ -51,6 +51,14 @@ class User < ApplicationRecord
         sorted_goals.select {|goal| goal.progress < 100 }.first(3)
     end 
 
+    def unique_goals_this_month 
+        self.goals_end_this_month - self.most_urgent_goals
+    end 
+
+    def unique_goals_this_week 
+        self.goals_end_this_week - self.most_urgent_goals
+    end 
+
     # Returns has with date as key and num activities on that date as 
     # value within the timeframe specific by the parameter
     def activity_by_time(time)

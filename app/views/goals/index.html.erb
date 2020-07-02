@@ -4,33 +4,33 @@
 <%= link_to "Create New Goal", "/goals/new", :method => :get, :class => "btn btn-primary"  %> 
 <br>
 <br>
-<h3><strong>Goals you should focus on:</strong></h3>
+<h3 style="color:red"><strong>⚠️ Goals you should focus on:</strong></h3>
 <ul>
     <% @user.most_urgent_goals.each do |goal| %>
         <li><%= link_to goal.name, goal_path(goal) %>
     <% end %>
 </ul>
 
-<% if !@user.goals_end_this_month.empty?%>
+<% if !@user.unique_goals_this_month.empty?%>
 <h3>Goals ending this month:</h3>
 <ul>
-    <% @user.goals_end_this_month.each do |goal| %>
+    <% (@user.unique_goals_this_month).each do |goal| %>
         <li><%= link_to goal.name, goal_path(goal) %>
     <% end %>
 </ul>
 <% end %>
 
-<% if !@user.goals_end_this_week.empty?%>
-<h3>Goals ending this month:</h3>
+<% if !@user.unique_goals_this_week.empty? %>
+<h3>Goals ending this week:</h3>
 <ul>
-    <% @user.goals_end_this_month.each do |goal| %>
+    <% @user.unique_goals_this_week.each do |goal| %>
         <li><%= link_to goal.name, goal_path(goal) %>
     <% end %>
 </ul>
 <% end %>
 
 <% if !@user.completed_goals.empty?%>
-<h3>Completed Goals:</h3>
+<h3>✔️ Completed Goals:</h3>
 <ul>
     <% @user.completed_goals.each do |goal| %>
         <li><%= link_to goal.name, goal_path(goal) %>
