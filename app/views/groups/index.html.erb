@@ -1,6 +1,22 @@
 <h1>Master Groups List</h1>
+<br>
+<h2>Your Top Matches</h2>
 <ul>
-    <% @groups.each do |g| %>
+    <% @top_matches.each do |g| %>
+        <li><%= link_to g.name, group_path(g) %></li>
+    <% end %>
+</ul>
+<br>
+<h2>You Might Also Like: </h2>
+<ul>
+    <% @rand_suggestion.each do |g| %>
+        <li><%= link_to g.name, group_path(g) %></li>
+    <% end %>
+</ul>
+<br>
+<h2>All Groups</h2>
+<ul>
+    <% @groups.sort_by(&:name).each do |g| %>
         <li><%= link_to g.name, group_path(g) %></li>
     <% end %>
 </ul>

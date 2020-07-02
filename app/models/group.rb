@@ -17,4 +17,18 @@ class Group < ApplicationRecord
     def is_creator?(user)
         self.creator_id == user.id
     end
+
+    def self.interest_match(user, num=3)
+        self.all.sort_by{ |grp| grp.num_in_common(user) }.reject{|grp| grp.belong?(user)}.first(num)
+    end
+
+
+    def num_in_common(user)
+        self.activity_types.reduce(0){|sum, acti| user.activity_types.include?(acti) ? sum += 1 : sum }
+    end
+
+    def self.calculation(num_user, num_group, num_match)
+        # first check nothing is zero
+        (num_user.to_f/num_group) * num_match
+    end
 end

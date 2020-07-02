@@ -1,6 +1,14 @@
 <h1><%= @group.name %></h2>
 <p><strong>Description: </strong><%= @group.description %></p>
 <img class="img-fluid" src="<%= @group.img_url %>">
+<br>
+<h2>We like to:</h2>
+<ul>
+    <% @group.activity_types.each do |acti| %>
+        <li><%= acti.name %></li>
+    <% end %>
+</ul>
+<br>
 <h2>Members List</h2>
 <ul>
     <% @group.users.each do |user| %>

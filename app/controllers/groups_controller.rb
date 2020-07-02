@@ -4,6 +4,8 @@ class GroupsController < ApplicationController
     def index
         @groups = Group.all
         @group = Group.new
+        @top_matches = Group.interest_match(current_user, 5)
+        @rand_suggestion = Group.all.reject{|grp| grp.belong?(current_user)}.sample(2)
     end
     
     def new
@@ -13,11 +15,12 @@ class GroupsController < ApplicationController
     end
 
     def create
-        byebug
         @group = Group.new(group_params)
-        params[:group][:activity_types].reject{|aty| aty==""}.each { |grp| @group.activity_type_ids << grp}
+        rej_params = params[:group][:activity_type_ids].reject{|aty| aty==""}
+        @group.activity_types = rej_params.map{ |actp| ActivityType.find(actp) }
         if @group.valid?
             @group.save
+            current_user.groups << @group
             redirect_to group_path(@group)
         else
             flash[:messages] = @group.errors.full_messages
@@ -32,7 +35,15 @@ class GroupsController < ApplicationController
 
     def update
         @group.update(group_params)
-        redirect_to group_path(@group)
+        rej_params = params[:group][:activity_type_ids].reject{|aty| aty==""}
+        @group.activity_types = rej_params.map{ |actp| ActivityType.find(actp) }
+        if @group.valid?
+            @group.save
+            redirect_to group_path(@group)
+        else
+            flash[:messages] = @group.errors.full_messages
+            redirect_to new_group_path
+        end
     end
 
     def destroy
@@ -48,7 +59,7 @@ class GroupsController < ApplicationController
     private
 
     def group_params
-        params.require(:group).permit(:name, :description, :creator_id)
+        params.require(:group).permit(:name, :description, :creator_id, :img_url)
     end
 
     def current_group
