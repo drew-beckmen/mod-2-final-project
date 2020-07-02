@@ -28,7 +28,7 @@
         <% end %>
     </tbody>
 </table>
-=
+
 <% if @group.belong?(@user) %>
     <%= bootstrap_form_with model: @membership, method: "delete", local: true  do |f| %>
         <%= f.hidden_field :group_id, :value => @group.id %>

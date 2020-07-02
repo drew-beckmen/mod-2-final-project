@@ -7,13 +7,14 @@
     <% end %>
 </ul>
 <br>
+<% if @rand_suggestion.count > 0 %>
 <h2>You Might Also Like: </h2>
 <ul>
     <% @rand_suggestion.each do |g| %>
         <li><%= link_to g.name, group_path(g) %></li>
     <% end %>
 </ul>
-<br>
+<% end %>
 
 </br>
 
