@@ -67,8 +67,10 @@
 <% if @group.belong?(@user) %>
 
 var disqus_config = function () {
-this.page.url = "localhost:3000/groups/<%= @group.id %>";  // Replace PAGE_URL with your page's canonical URL variable
+s.src = '//centered.disqus.com/embed.js'; 
+this.page.url = "<%= url_for(@group) %>";  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = "<%= @group.id %>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+this.page.title = "<%= @group.name %>";
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
