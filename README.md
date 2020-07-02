@@ -5,8 +5,6 @@
 
 ---
 
-![logo](/app/assets/images/Handdrawn%20Circle%20Logo-3.png)
-
 Centered is a web app focused on you. Set goals and track your progress towards those goals as you log the activities you do for self-care. Join or create a community of members in order to find similarly-minded people who can guide you on your wellness journey. 
 
 ![landing](/app/assets/images/Screen%20Shot%202020-07-02%20at%203.21.18%20PM.png)
