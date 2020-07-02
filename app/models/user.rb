@@ -51,6 +51,14 @@ class User < ApplicationRecord
         sorted_goals.select {|goal| goal.progress < 100 }.first(3)
     end 
 
+    def unique_goals_this_month 
+        self.goals_end_this_month - self.most_urgent_goals
+    end 
+
+    def unique_goals_this_week 
+        self.goals_end_this_week - self.most_urgent_goals
+    end 
+
     # Returns has with date as key and num activities on that date as 
     # value within the timeframe specific by the parameter
     def activity_by_time(time)
@@ -65,7 +73,27 @@ class User < ApplicationRecord
             end 
         end
         hash_of_activities  
-    end     
+    end   
+    
+    # Returns activities within the last 
+    # x number of days
+    def activities_this_time(time) 
+        self.activities.select do |activity| 
+            activity.activity_date >= Date.today - time && activity.activity_date <= Date.today 
+        end 
+    end 
+
+    def activities_this_week 
+        activities_this_time(7)
+    end 
+
+    def activities_this_month
+        activities_this_time(30) -  activities_this_time(7)
+    end 
+
+    def older_activities 
+        self.activities - activities_this_month - activities_this_week
+    end 
 
     def streak_this_week?
         activity_by_time(7).size == 7
@@ -113,4 +141,9 @@ class User < ApplicationRecord
     def connected_via_group?(another_user)
         self.groups.map{|group| group.users.include?(another_user)}.include?(true)
     end
+
+    def find_group(group)
+        self.memberships.find_by(group_id: group.id).created_at
+    end 
+
 end

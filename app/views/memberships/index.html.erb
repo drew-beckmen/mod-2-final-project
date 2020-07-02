@@ -1,7 +1,35 @@
-<h1>These are your groups <%= @user.name %>!</h1>
-<ul>
-    <% @memberships.each do |mem| %>
-        <li><%= link_to mem.group.name, group_path(mem.group)%></li>
-    <% end %>
-</ul>
+
 <h4><strong><%= button_to "Create a new group!", new_group_path, method: :get %></strong><h4>
+
+<% if @user.memberships.count > 0 %>
+    <h1 style="color:lightblue">You joined some awesome communities, <%= @user.name %>!</h1>
+<% else  %>
+    <h1 style="color:lightblue">Time to join a community, <%= @user.name %>!</h1>
+    <%= link_to 'Join a group!', groups_path, :class => "btn btn-primary"%>
+<% end %>
+
+<br/>
+
+<% if @user.memberships.count > 0 %>
+<h3><em>Click on a group to join the discussion</em></h3>
+
+</br>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Group Name</th>
+            <th scope="col">Joined</th>
+            <th scope="col">Group Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.memberships.each do |membership| %>
+            <tr>
+                <td><%= link_to membership.group.name, group_path(membership.group) %></td>
+                <td><%= membership.created_at.strftime("%m/%d/%Y") %></td>
+                <td><%= membership.group.created_at.strftime("%m/%d/%Y") %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>

@@ -1,25 +1,6 @@
-<h1>Welcome to Centered:</h1>
+<%= render "navbar"%>
 
-<% if flash[:message] %>
-    <ul>
-        <li><%= flash[:message] %></li>
-    </ul>
-<% end %>
+<div id="my-image-div">
+    <img class="img-fluid" src="https://images.unsplash.com/photo-1454650878111-b736c9a5e9c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2112&q=80" >
+</div>
 
-<%= form_tag('/login', method: "post") do %>
-    <label>Username:</label>
-    <%= text_field_tag :username %>
-    <br/>
-    <br/>
-
-    <label>Password:</label>
-    <%= password_field_tag :password %>
-    <br/><br/>
-    <%= submit_tag "Login" %>
-
-<% end %>
-
-<br/>
-
-<h2>Don't have an account?</h2>
-<%= link_to  "Create New User", '/users/new' %>

@@ -1,7 +1,16 @@
-<h1>User Public Profile:</h1>
+<%= stylesheet_link_tag "profile.css" %>
 
-<img class="img-fluid" src="<%= @user.photo %>">
+<h1 style="color:lightblue">User Public Profile:</h1>
 
+<% if params[:id].to_i == session[:user_id] %>
+    <div class="btn btn-default">
+        <%= link_to "Edit Profile", "/users/#{session[:user_id]}/edit", :method => :get, :class => "btn btn-primary"  %>
+    </div>
+<% end %>
+
+
+<img style="padding:40px" ALIGN="left" class="img-fluid" id="profilepic" src="<%= @user.photo %>">
+</br></br></br>
 <h2>Name: <%= @user.name %></h2>
 <h2><%= @user.created_at.strftime("Member since: %m/%d/%Y")%></h2>
 <h2>Activities Logged on Centered: <%= @user.activities.count %></h2>
@@ -9,3 +18,4 @@
 <h2>Contact: 
     <a href="mailto:<%=@user.contact%>"> <%= @user.contact%></a>
 </h2>
+</br></br></br></br></br>

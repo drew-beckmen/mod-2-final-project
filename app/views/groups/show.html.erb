@@ -1,6 +1,7 @@
-<h1><%= @group.name %></h2>
+<h1 style="color:lightblue"><%= @group.name %></h2>
 <p><strong>Description: </strong><%= @group.description %></p>
 <img class="img-fluid" src="<%= @group.img_url %>">
+
 <br>
 <h2>We like to:</h2>
 <ul>
@@ -9,33 +10,47 @@
     <% end %>
 </ul>
 <br>
-<h2>Members List</h2>
-<ul>
-    <% @group.users.each do |user| %>
-        <li><%= link_to user.name, user_path(user) %></li>
-    <% end %>
-</ul>
+
+<h2>Members</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Joined</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @group.users.each do |user| %>
+            <tr>
+                <td><%= link_to user.name, user_path(user) %></td>
+                <td><%= user.find_group(@group).strftime("%m/%d/%Y") %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+=
 <% if @group.belong?(@user) %>
-    <%= form_with model: @membership, method: "delete", local: true  do |f| %>
+    <%= bootstrap_form_with model: @membership, method: "delete", local: true  do |f| %>
         <%= f.hidden_field :group_id, :value => @group.id %>
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
         <%= f.submit "Leave Group" %>
     <% end %>
 <% else %>
-    <%= form_with model: @membership, local: true do |f| %>
+    <%= bootstrap_form_with model: @membership, local: true do |f| %>
         <%= f.hidden_field :group_id, :value => @group.id %>
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
         <%= f.submit "Join Group" %>
     <% end %>
 <% end %>
-
+<br>
 <% if @group.is_creator?(@user) %>
     <%= form_with url: edit_group_path(@group), method: "get", local: true  do |f| %>
         <%= f.submit "Edit Group" %>
     <% end %>
+    <%= link_to 'Delete Group', "/groups/#{@group.id}", :method => :delete, :class => "btn btn-danger"%>
 <% end %>
 
-
+<br>
 <div id="disqus_thread"></div>
 <script>
 

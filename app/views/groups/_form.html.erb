@@ -7,11 +7,16 @@
 <% end %>
 
 <%= bootstrap_form_with model: @group, local: true do |f| %>
+
     <%= f.text_field :name%>
+
     <%= f.text_area :description %>
+
     <%= f.text_field :img_url, label: "Image URL (optional)" %>
     <%= f.hidden_field :creator_id, value: @user.id %>
     <%= f.label "What activities are related to this group? (optional)"%>
     <%= f.collection_select :activity_type_ids, @activity_types.sort_by(&:name), :id, :name, {label: "Select one or more groups:"}, {size: 10, multiple: true} %>
+
     <%= f.submit %>
 <% end %>
+</br>

@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController 
-    skip_before_action :authenticated, only: [:new, :create]
-    def new 
+    skip_before_action :authenticated, only: [:new, :create, :welcome]
+    def new
+        if session[:user_id]
+            redirect_to "/home/#{session[:user_id]}"
+        end 
     end 
     
     def create 
@@ -12,6 +15,9 @@ class SessionsController < ApplicationController
             flash[:message] = "Incorrect email or password"
             redirect_to "/"
         end 
+    end 
+
+    def welcome  
     end 
 
     def destroy 

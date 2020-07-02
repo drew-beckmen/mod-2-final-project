@@ -3,7 +3,8 @@
 <%= render "form" %>
 
 <br/>
-<br/>
-<br/> 
 
-<%= button_to "Delete User", {:controller => :users, :action => 'destroy', :id => @user.id }, :method => :delete %>
+<h2 style="color:red"><strong><em>Warning: This Action Is Irreversible</em></strong></h2>
+<%= link_to "Delete Account", "/users/#{session[:user_id]}", :method => :delete, :class => "btn btn-danger" %>
+
+<br/> <br/>
