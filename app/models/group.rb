@@ -5,6 +5,7 @@ class Group < ApplicationRecord
     has_many :activity_types, through: :group_activity_types
     validates :name, presence: true
     validates :name, uniqueness: true
+    validates :img_url, presence: true 
 
     def belong?(user)
         !!belong(user)

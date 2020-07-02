@@ -5,8 +5,9 @@
 <h1 style="color:lightblue"><%= @group.name %></h2>
 <p><em><%= @group.description %></em></p>
 
+<% if @group.img_url %>
 <img style="padding:40px" ALIGN="left" class="img-fluid" id="grouppic" src="<%= @group.img_url %>">
-
+<% end %>
 
 
 
@@ -53,6 +54,7 @@
 <% if @group.is_creator?(@user) %>
     <%= link_to 'Edit Group', "/groups/#{@group.id}/edit", :method => :get, :class => "btn btn-primary"%>
     <%= link_to 'Delete Group', "/groups/#{@group.id}", :method => :delete, :class => "btn btn-danger"%>
+    </br>
 <% end %>
 
 <br>
@@ -62,9 +64,10 @@
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+<% if @group.belong?(@user) %>
 
 var disqus_config = function () {
-this.page.url = "<%= url_for @group %>";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.url = "localhost:3000/groups/<%= @group.id %>";  // Replace PAGE_URL with your page's canonical URL variable
 this.page.identifier = "<%= @group.id %>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 
@@ -77,4 +80,4 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-
+<% end %>

@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag "profile.css" %>
 
 <h1><%= @activity.activity_type.name %>:</h1> <em><p><%= @activity.description %></p></em>
+<%= link_to 'Edit this Activity', "/activities/#{@activity.id}/edit", :method => :get, :class => "btn btn-primary"%>
 
 <img style="padding:40px" ALIGN="left" class="img-fluid" id="profilepic" src="/assets/Red Lines Sports Logo.png">
 
@@ -15,7 +16,6 @@
 <br>
 <br>
 
-<%= link_to 'Edit this Activity', "/activities/#{@activity.id}/edit", :method => :get, :class => "btn btn-primary"%>
 
 </br>
 </br>
