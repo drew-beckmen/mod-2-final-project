@@ -1,23 +1,7 @@
 <h1 style="color:lightblue">Find your community on <em>Centered</em></h1>
 
-<h2>Your Top Matches</h2>
-<ul>
-    <% @top_matches.each do |g| %>
-        <li><%= link_to g.name, group_path(g) %></li>
-    <% end %>
-</ul>
-<br>
-<% if @rand_suggestion.count > 0 %>
-<h2>You Might Also Like: </h2>
-<ul>
-    <% @rand_suggestion.each do |g| %>
-        <li><%= link_to g.name, group_path(g) %></li>
-    <% end %>
-</ul>
-<% end %>
-
 </br>
-
+<h2>Recommended Groups</h2>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -27,7 +11,52 @@
         </tr>
     </thead>
     <tbody>
-        <% @groups.sort_by(&:name).each do |group| %>
+        <% @top_matches.each do |group| %>
+            <tr>
+                <td><%= link_to group.name, group_path(group) %></td>
+                <td><%= group.memberships.count %></td>
+                <td><%= group.created_at.strftime("%m/%d/%Y") %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
+<% if @rand_suggestion.count > 0 %>
+<h2>You Might Also Like: </h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Group Name</th>
+            <th scope="col">Members</th>
+            <th scope="col">Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @rand_suggestion.each do |group| %>
+            <tr>
+                <td><%= link_to group.name, group_path(group) %></td>
+                <td><%= group.memberships.count %></td>
+                <td><%= group.created_at.strftime("%m/%d/%Y") %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+
+</br>
+
+<h2>Other Groups on <em>Centered</em></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Group Name</th>
+            <th scope="col">Members</th>
+            <th scope="col">Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% (@groups - @rand_suggestion - @top_matches).sort_by(&:name).each do |group| %>
             <tr>
                 <td><%= link_to group.name, group_path(group) %></td>
                 <td><%= group.memberships.count %></td>
