@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
     def index
         @groups = Group.all
         @group = Group.new
-        @top_matches = Group.interest_match(current_user, 5)
+        @top_matches = Group.interest_match(current_user)
         @rand_suggestion = (Group.all.reject{|grp| grp.belong?(current_user)} - @top_matches).sample(2)
     end
     

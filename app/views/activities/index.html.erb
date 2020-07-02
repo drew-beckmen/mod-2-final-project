@@ -6,7 +6,7 @@
 <hr>
 <h2><i>Average Rating by Activity Type:</i></h2>
 <ul>
-<li>Your least favorite type of activity is <%= @user.most_hated_activity_type %>. Keep working on it champ! &#127942;</li>
+<li>Your least favorite type of activity is <%= @user.most_hated_activity_type if @user.activities.count > 0 %>. Keep working on it champ! &#127942;</li>
 </ul>
 
 <%= column_chart @user.formatted_activity_type_ratings, max: 10 %>

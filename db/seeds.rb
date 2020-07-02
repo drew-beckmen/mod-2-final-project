@@ -155,7 +155,7 @@ group_names = [
     'Music nerds',
     'NYC members',
     'Friends of furry friends',
-    'Frog on Zsh!]'
+    'Frog on Zsh!'
 ].cycle
 
 group_descriptions = [
@@ -190,5 +190,5 @@ activity_names.each {|aname| ActivityType.create(name: aname)}
 
 User.all.each do |user|
     groups = Group.all.shuffle
-    Kernel.rand(1..10).times { user.groups << groups.pop }
+    Kernel.rand(1..6).times { user.groups << groups.pop }
 end
