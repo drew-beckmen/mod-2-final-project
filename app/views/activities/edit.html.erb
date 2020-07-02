@@ -2,6 +2,8 @@
 <%= render "form" %>
 
 <br/>
-<%= form_for(@activity, method: :delete) do |f| %>
-    <%= f.submit "Delete this activity" %>
-<% end %>
+
+<%= link_to 'Delete this activity', "/activities/#{@activity.id}", :method => :delete, :class => "btn btn-danger"%>
+
+<br/>
+<br/>

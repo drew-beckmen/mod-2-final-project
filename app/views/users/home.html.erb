@@ -1,43 +1,46 @@
-<h1>Welcome, <%= @user.name %>!</h1>
+<h1 style="color:lightblue">Welcome, <%= @user.name %>!</h1>
 
-<%= button_to "Set New Goal", new_goal_path, :method => :get %>
+<div class="btn btn-default">
+    <%= link_to "Logout", "/logout", :method => :delete, :class => "btn btn-primary"  %> |
+    <%= link_to 'Set New Goal', new_goal_path, :class => "btn btn-primary" %> |
+    <%= link_to 'Log an Activity', new_activity_path, :class => "btn btn-primary"%>
+</div>
 </br>
-
-<%= button_to "Log an Activity", new_activity_path, :method => :get %>
-
 </br>
 
 <% if @user.has_streak? %>
-<h2>Badges:</h2>
+<h2 style="color:lightgreen">Badges:</h2>
 <ul>
     <% if @user.streak_today? %>
-        <li>You centered yourself today! &#127881;</li>
+        <li>Daily Goal: You centered yourself today! &#127881;</li>
     <% end %>
 
     <% if @user.streak_this_week? %>
-        <li>You centered yourself every day this week! &#127881;</li>
+        <li>Weekly Goal: You centered yourself every day this week! &#127881;</li>
     <% end %>
 
     <% if @user.streak_this_month? %>
-        <li>You centered yourself every day this month! &#127881;</li>
+        <li>Monthly Goal: You centered yourself every day this month! &#127881;</li>
     <% end %>
 
 </ul>
 <% end %>
+<hr>
 
-
-<h2>Your Overall Activity Summary:</h2>
+<h2 style="color:darkgray">Your Overall Activity Summary:</h2>
 <%= line_chart @user.activities.group_by_day(:activity_date).count %>
+<hr>
 
-<h2>Your Activity This Week:</h2>
+<h2 style="color:darkgray">Your Activity This Week:</h2>
 <%= line_chart @user.activities.group_by_day(:activity_date).count, xmin: Date.today - 7, xmax: Date.today %>
 
+<hr>
 
-<h2>Your Activity Summary by Type:</h2>
+<h2 style="color:darkgray">Your Activity Summary by Type:</h2>
 <%= pie_chart @user.formatted_activities %>
+<hr>
 
-<h2>Your Goal Progress:</h2>
+<h2 style="color:darkgray">Your Goal Progress:</h2>
 <%= column_chart @user.formatted_goals, suffix: "%", max: 100 %>
 
 
-<%= button_to "Logout", "/logout", :method => :delete %>

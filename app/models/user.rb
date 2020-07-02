@@ -65,7 +65,27 @@ class User < ApplicationRecord
             end 
         end
         hash_of_activities  
-    end     
+    end   
+    
+    # Returns activities within the last 
+    # x number of days
+    def activities_this_time(time) 
+        self.activities.select do |activity| 
+            activity.activity_date >= Date.today - time && activity.activity_date <= Date.today 
+        end 
+    end 
+
+    def activities_this_week 
+        activities_this_time(7)
+    end 
+
+    def activities_this_month
+        activities_this_time(30) -  activities_this_time(7)
+    end 
+
+    def older_activities 
+        self.activities - activities_this_month - activities_this_week
+    end 
 
     def streak_this_week?
         activity_by_time(7).size == 7
@@ -108,5 +128,9 @@ class User < ApplicationRecord
 
     def most_hated_activity_type
         formatted_activity_type_ratings.min_by {|k, v| v}.first
+    end 
+
+    def find_group(group)
+        self.memberships.find_by(group_id: group.id).created_at
     end 
 end

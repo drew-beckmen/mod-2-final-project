@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/home/:id', to: "users#home"
   delete "/logout", to: "sessions#destroy"
   post '/login', to: 'sessions#create'
-
+  get '/login', to: 'sessions#welcome'
 
   resources :groups #, only: [:index, :show, :new, :create]
   

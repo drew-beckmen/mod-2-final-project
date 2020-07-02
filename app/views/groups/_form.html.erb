@@ -6,13 +6,15 @@
     </ul>
 <% end %>
 
-<%= form_with model: @group, local: true do |f| %>
-    <strong><%= f.label :name %></strong>
+<%= bootstrap_form_with model: @group, local: true do |f| %>
+
     <%= f.text_field :name%>
-    <strong><%= f.label :description %></strong>
+
     <%= f.text_area :description %>
-    <strong><%= f.label "Image URL (optional)" %></strong>
-    <%= f.text_field :img_url %>
+
+    <%= f.text_field :img_url, label: "Image URL (optional)" %>
     <%= f.hidden_field :creator_id, value: @user.id %>
+
     <%= f.submit %>
 <% end %>
+</br>

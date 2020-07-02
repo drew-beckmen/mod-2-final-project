@@ -1,20 +1,64 @@
-<h1>Activities List for <%=@user.name%></h1>
+<h1 style="color:lightblue">Activities List for <%=@user.name%></h1>
 <br>
-<%= button_to "Log an Activity", "/activities/new", :method => :get %>
+<%= link_to 'Log an activity', new_activity_path, :class => "btn btn-primary"%>
 <br>
+<br>
+<hr>
 <h2><i>Average Rating by Activity Type:</i></h2>
 <ul>
 <li>Your least favorite type of activity is <%= @user.most_hated_activity_type %>. Keep working on it champ! &#127942;</li>
 </ul>
 
 <%= column_chart @user.formatted_activity_type_ratings, max: 10 %>
+<hr>
+<% if @user.activities_this_week.count > 0 %>
+<h2><i>Activities This Past Week:</i></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Activity Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.activities_this_week.each do |activity| %>
+            <tr>
+                <td><%= link_to activity.activity_type.name, activity_path(activity) %></td>
+                <td><%= activity.activity_date %></td>
+                <td><%= activity.rating %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+<hr>
+<% if @user.activities_this_month.count > 0 %>
+<h2><i>Activities This Past Month:</i></h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Activity Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @user.activities_this_month.each do |activity| %>
+            <tr>
+                <td><%= link_to activity.activity_type.name, activity_path(activity) %></td>
+                <td><%= activity.activity_date %></td>
+                <td><%= activity.rating %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+<hr>
 
+<h2><i>Additional Activities You've Logged:</i></h2>
 <ul>
-    <% @activities.each do |act| %>
+    <% @user.older_activities.each do |act| %>
         <li><%= link_to "#{act.activity_date.strftime('%m/%d/%y')} — #{act.activity_type.name}", activity_path(act) %> </li>
     <% end %>
 </ul>
-
-
-
-

@@ -1,0 +1,9 @@
+#profilepic {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%; /*don't forget prefixes*/
+    background-image: url("path/to/image");
+    background-position: center center;
+    /* as mentioned by Vad: */
+    background-size: cover;
+}
