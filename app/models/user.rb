@@ -5,7 +5,7 @@ class User < ApplicationRecord
     has_many :memberships
     has_many :groups, through: :memberships
 
-    validates :name, :username, :contact, :photo, :password, :password_confirmation, :presence => true 
+    validates :name, :username, :contact, :photo, :password, :password_confirmation, :about, :presence => true 
     validates :username, :uniqueness => true 
     validates :contact, format: { with: URI::MailTo::EMAIL_REGEXP } 
     validates :password, length: {minimum: 6}

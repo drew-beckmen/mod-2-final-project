@@ -1,9 +1,16 @@
-<h1 style="color:lightblue"><%= @group.name %></h2>
-<p><strong>Description: </strong><%= @group.description %></p>
-<img class="img-fluid" src="<%= @group.img_url %>">
+<%= stylesheet_link_tag "profile.css" %>
 
-<br>
-<h2>We like to:</h2>
+
+
+<h1 style="color:lightblue"><%= @group.name %></h2>
+<p><em><%= @group.description %></em></p>
+
+<img style="padding:40px" ALIGN="left" class="img-fluid" id="grouppic" src="<%= @group.img_url %>">
+
+
+
+
+<h2>We <em style="color:lightblue">center</em> ourselves with:</h2>
 <ul>
     <% @group.activity_types.each do |acti| %>
         <li><%= acti.name %></li>
@@ -44,9 +51,7 @@
 <% end %>
 <br>
 <% if @group.is_creator?(@user) %>
-    <%= form_with url: edit_group_path(@group), method: "get", local: true  do |f| %>
-        <%= f.submit "Edit Group" %>
-    <% end %>
+    <%= link_to 'Edit Group', "/groups/#{@group.id}/edit", :method => :get, :class => "btn btn-primary"%>
     <%= link_to 'Delete Group', "/groups/#{@group.id}", :method => :delete, :class => "btn btn-danger"%>
 <% end %>
 

@@ -1,21 +1,20 @@
 <h1 style="color:lightblue">Goal: <%= @goal.name %></h1>
-<%= link_to 'All Goals', "/goals", :method => :get, :class => "btn btn-primary"%>
-
-<br><br>
-<%= link_to 'Edit Goal', "/goals/#{@goal.id}/edit", :method => :get, :class => "btn btn-primary"%>
-
+<div class="btn btn-default">
+    <%= link_to 'All Goals', "/goals", :method => :get, :class => "btn btn-primary"%> | 
+    <%= link_to 'Edit Goal', "/goals/#{@goal.id}/edit", :method => :get, :class => "btn btn-danger"%>
+</div>
 <br><br>
 
 <h2><i><%= @goal.description %></i></h2>
 <hr>
 <ul>
-    <li>Start Date: <%= @goal.start_day %></li>
-    <li>End Date: <%= @goal.end_day %></li>
+    <li>Start Date: <%= @goal.start_day.strftime("%m/%d/%Y") %></li>
+    <li>End Date: <%= @goal.end_day.strftime("%m/%d/%Y") %></li>
     <li>Hours Completed: <%= @goal.hours_so_far %></li>
     <li>Target Number of Hours: <%= @goal.target_hours %></li>
 </ul>
 <hr>
-<h2><i>Progress Towards This Goal:</i></h2>
+<h2 style="color:lightblue"><i>Progress Towards This Goal:</i></h2>
 <h3>Current Status: <%= @goal.status %></h3>
 <%= pie_chart @goal.progress_for_pie_chart, colors: ["green", "black"]%>
 <hr>

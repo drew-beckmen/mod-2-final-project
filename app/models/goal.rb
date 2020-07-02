@@ -22,11 +22,11 @@ class Goal < ApplicationRecord
 
     def status 
         if self.progress >= 100 
-            "Goal complete!"
+            "Goal complete! ✔️"
         elsif self.progress <= 100 && self.end_day < Date.today
-            "Goal expired without completion"
+            "Goal expired without completion 🛑"
         else 
-            "Goal incomplete. Keep working!"
+            "Goal incomplete. Keep working! 👏"
         end 
     end 
 end

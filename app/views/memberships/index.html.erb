@@ -1,6 +1,7 @@
-
-<h4><strong><%= button_to "Create a new group!", new_group_path, method: :get %></strong><h4>
-
+<br>
+<%= link_to 'Create a new group!', new_group_path, :class => "btn btn-primary"%>
+<br>
+<br>
 <% if @user.memberships.count > 0 %>
     <h1 style="color:lightblue">You joined some awesome communities, <%= @user.name %>!</h1>
 <% else  %>

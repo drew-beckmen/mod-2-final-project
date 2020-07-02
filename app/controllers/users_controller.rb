@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         @user.attributes = user_params 
         if @user.valid? 
             @user.save 
-            redirect_to "/home/#{@user.id}"
+            redirect_to "/users/#{@user.id}"
         else 
             flash[:errors] = @user.errors.full_messages
             redirect_to "/users/#{@user.id}/edit"
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     end
 
     def user_params 
-        params.require(:user).permit(:username, :password, :password_confirmation, :name, :contact, :photo)
+        params.require(:user).permit(:username, :password, :password_confirmation, :name, :contact, :photo, :about)
     end 
 
     def find_user_logged_in 

@@ -1,7 +1,16 @@
 #profilepic {
-    width: 400px;
     height: 400px;
-    border-radius: 50%; /*don't forget prefixes*/
+    width: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#grouppic {
+    width: auto;
+    height: auto;
+    border: 5px solid cornflowerblue;
+    border-radius: 4px;
+    padding: 5px;
     background-image: url("path/to/image");
     background-position: center center;
     /* as mentioned by Vad: */
