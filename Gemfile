@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'coffee-rails'
 gem "chartkick"
 gem 'groupdate'
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem "bootstrap_form", "~> 4.0"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
