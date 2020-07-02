@@ -20,7 +20,7 @@ class Group < ApplicationRecord
     end
 
     def self.interest_match(user, num=3)
-        self.all.sort_by{ |grp| grp.num_in_common(user) }.reject{|grp| grp.belong?(user)}.first(num)
+        self.all.sort_by{ |grp| grp.num_in_common(user) }.reject{|grp| grp.belong?(user)}.reverse.first(num)
     end
 
 
