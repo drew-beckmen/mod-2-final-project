@@ -2,7 +2,7 @@ class Goal < ApplicationRecord
     belongs_to :user
     has_many :activities
     has_many :activity_types, through: :activities
-    validates :name, :description, presence: true 
+    validates :name, presence: true 
     validates :target_hours, :start_day, :end_day, presence: true 
     validates :target_hours, numericality: {greater_than: 0}
 

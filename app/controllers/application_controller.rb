@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
         !!current_user
     end 
 
-    def authenticated 
+    def authenticated
+        # byebug 
         redirect_to "/" unless logged_in?
     end 
 

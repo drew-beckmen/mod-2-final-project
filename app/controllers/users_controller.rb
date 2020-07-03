@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     private 
 
     def redirect_unauthorized
-        if !current_user.connected_via_group?(@user)
+        if (@user != current_user) && !current_user.connected_via_group?(@user)
             redirect_to user_path(current_user)
         end
     end
