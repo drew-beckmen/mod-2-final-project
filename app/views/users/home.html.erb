@@ -31,13 +31,16 @@
 <%= line_chart @user.activities.group_by_day(:activity_date).count %>
 <hr>
 
-<h2 style="color:darkgray">Your Activity This Week:</h2>
+<h2 style="color:darkgray">Your Activity This Week: <%= "None" if @user.activities_this_week.empty? %> </h2>
+<% if !@user.activities_this_week.empty? %>
 <%= line_chart @user.activities.group_by_day(:activity_date).count, xmin: Date.today - 7, xmax: Date.today %>
-
+<% end %>
 <hr>
 
-<h2 style="color:darkgray">Your Activity Summary by Type:</h2>
+<h2 style="color:darkgray">Your Activity Summary by Type: <%= "None" if @user.formatted_activities.empty? %></h2>
+<% if !@user.formatted_activities.empty? %>
 <%= pie_chart @user.formatted_activities %>
+<% end %>
 <hr>
 
 <h2 style="color:darkgray">Your Goal Progress:</h2>
