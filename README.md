@@ -21,6 +21,7 @@ Once logged in, users have access to comprehensive graphs that track every aspec
 1. Ruby on Rails 
 2. HTML/CSS & Bootstrap
 3. Bcrypt Gem 
+4. Chartkick Gem
 
 ## Running the Project Locally 
 
