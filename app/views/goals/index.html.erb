@@ -38,5 +38,12 @@
 </ul>
 <% end %>
 
-
+<% if !@user.other_goals.empty? %>
+<h3> Other Goals to Work On: </h3>
+<ul>
+    <% @user.other_goals.each do |goal| %>
+        <li><%= link_to goal.name, goal_path(goal) %>
+    <% end %>
+</ul>
+<% end %>
 

@@ -11,6 +11,7 @@ require 'date'
 User.destroy_all 
 Activity.destroy_all 
 ActivityType.destroy_all
+GroupActivityType.destroy_all 
 Membership.destroy_all 
 Group.destroy_all 
 Goal.destroy_all 
@@ -186,7 +187,7 @@ group_images = [
 
 activity_names.each {|aname| ActivityType.create(name: aname)}
 11.times { User.create(name: user_names.next, contact: user_emails.next, username: user_user_names.next, password: 'password', password_confirmation: 'password', photo: user_images.next, about: user_abouts.next )} 
-10.times { Group.create(name: group_names.next, description: group_descriptions.next, img_url: group_images.next)}
+10.times { Group.create(name: group_names.next, description: group_descriptions.next, img_url: group_images.next, creator_id: 64)}
 
 User.all.each do |user|
     groups = Group.all.shuffle

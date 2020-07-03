@@ -16,6 +16,7 @@ class Group < ApplicationRecord
     end
 
     def is_creator?(user)
+        # byebug
         self.creator_id == user.id
     end
 

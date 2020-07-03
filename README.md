@@ -14,6 +14,9 @@ Once logged in, users have access to comprehensive graphs that track every aspec
 ![homepage](/app/assets/images/Screen%20Shot%202020-07-02%20at%203.23.58%20PM.png)
 
 
+## Basic Feature Demo
+![](/app/assets/images/Jul-02-2020%2022-54-22.gif)
+
 ## Technologies 
 1. Ruby on Rails 
 2. HTML/CSS & Bootstrap

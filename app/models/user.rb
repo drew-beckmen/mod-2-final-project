@@ -59,6 +59,10 @@ class User < ApplicationRecord
         self.goals_end_this_week - self.most_urgent_goals
     end 
 
+    def other_goals
+        self.goals - self.unique_goals_this_month - self.unique_goals_this_week - self.completed_goals - self.most_urgent_goals
+    end 
+
     # Returns has with date as key and num activities on that date as 
     # value within the timeframe specific by the parameter
     def activity_by_time(time)
