@@ -22,6 +22,9 @@ class ActivitiesController < ApplicationController
 
     def create
         @activity = Activity.new(activity_params)
+        if !a_new_goal?
+            @activity.goal.update_attributes(start_day: @activity.activity_date)
+        end
         if @activity.valid?
             @activity.save
             if a_new_goal?
@@ -43,8 +46,20 @@ class ActivitiesController < ApplicationController
     end
 
     def update
-        @activity.update(activity_params)
-        redirect_to activity_path(@activity)
+        @activity.assign_attributes(activity_params)
+        if @activity.valid?
+            @activity.save
+            if a_new_goal?
+                redirect_to activity_path(@activity)
+            else
+                redirect_to edit_goal_path(@activity.goal)
+            end
+        else
+            flash[:errors] = @activity.errors.full_messages
+            redirect_to edit_activity_path
+            # render 'show'
+        end
+        # redirect_to activity_path(@activity)
     end
 
     def destroy
@@ -68,7 +83,7 @@ class ActivitiesController < ApplicationController
         @activity = Activity.find(params[:id])
     end
 
-    def a_new_goal?
+    def a_new_goal?  #this actually seems to be the opposite of what the method title suggests, thought implememeted properly
         (!params[:activity][:goal_attributes]) || (!params[:activity][:goal_attributes][:name]) || params[:activity][:goal_attributes][:name].strip==""
     end
 end

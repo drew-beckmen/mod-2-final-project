@@ -5,10 +5,15 @@ class Goal < ApplicationRecord
     validates :name, presence: true 
     validates :target_hours, :start_day, :end_day, presence: true 
     validates :target_hours, numericality: {greater_than: 0}
+    validate :dates_proper_order
 
     def hours_so_far
         self.activities.sum(&:duration)
-    end 
+    end
+
+    def dates_proper_order
+        errors.add(:base, "Your start day can't be after your end day!") unless self.start_day <= self.end_day
+    end
 
     def progress 
         (self.hours_so_far / self.target_hours).round(3) * 100
